@@ -4,7 +4,7 @@
 //
 //  Created by 郜宇 on 2017/9/8.
 //  Copyright © 2017年 Loopeer. All rights reserved.
-//
+//  TODO: 1. add CompleteSelectAssetsBlock
 
 import UIKit
 import Photos

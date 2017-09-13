@@ -29,8 +29,8 @@ class TitleView: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setImage(LPAlbum.Config.arrowImage, for: .normal)
-        setTitleColor(LPAlbum.Config.barTitleColor, for: .normal)
+        setImage(LPAlbum.Style.arrowImage, for: .normal)
+        setTitleColor(LPAlbum.Style.barTitleColor, for: .normal)
         titleLabel?.font = UIFont.systemFont(ofSize: 17)
         bounds = CGRect(origin: .zero, size: CGSize(width: 200, height: 40))
         addTarget(self, action: #selector(click), for: .touchUpInside)

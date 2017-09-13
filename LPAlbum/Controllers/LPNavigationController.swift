@@ -11,7 +11,7 @@ import UIKit
 class LPNavigationController: UINavigationController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return LPAlbum.Config.statusBarStyle
+        return LPAlbum.Style.statusBarStyle
     }
     
     override func viewDidLoad() {
@@ -22,8 +22,8 @@ class LPNavigationController: UINavigationController {
     
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
-        self.navigationBar.barTintColor = LPAlbum.Config.barTintColor
-        self.navigationBar.tintColor = LPAlbum.Config.tintColor
+        self.navigationBar.barTintColor = LPAlbum.Style.barTintColor
+        self.navigationBar.tintColor = LPAlbum.Style.tintColor
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

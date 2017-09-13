@@ -9,11 +9,11 @@
 import Foundation
 import Photos
 
-class AlbumManager {
+public class AlbumManager {
     
     static let imageManager = PHCachingImageManager()
     
-    class func getAlbums() -> [AlbumModel] {
+    public class func getAlbums() -> [AlbumModel] {
         //获取智能相册
         let smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
         //获取用户创建的相册
@@ -25,7 +25,7 @@ class AlbumManager {
     }
     
     // 根据Asset获取photo
-    class func getPhoto(asset: PHAsset, targetSize: CGSize, option: PHImageRequestOptions? = nil, resultHandler: @escaping ((UIImage?, [AnyHashable: Any]?) -> Void)) {
+    public class func getPhoto(asset: PHAsset, targetSize: CGSize, option: PHImageRequestOptions? = nil, resultHandler: @escaping ((UIImage?, [AnyHashable: Any]?) -> Void)) {
         
         let defalutOption = PHImageRequestOptions()
         defalutOption.resizeMode = .fast

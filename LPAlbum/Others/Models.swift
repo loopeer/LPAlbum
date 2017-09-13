@@ -9,12 +9,12 @@
 import Foundation
 import Photos
 
-struct AssetModel {
+public struct AssetModel {
     var asset: PHAsset
     var isSelect: Bool
 }
 
-struct AlbumModel {
+public struct AlbumModel {
     var name: String
     var cover: PHAsset
     var count: Int
