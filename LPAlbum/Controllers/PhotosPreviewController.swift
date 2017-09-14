@@ -13,7 +13,7 @@ class PhotosPreviewController: UIViewController {
     var assetModels: [AssetModel]!
     var currentIndex: Int!
     
-    var chooseAction: ((AssetModel, Int) -> Void)?
+    var chooseAction: ((Int, UIButton, PhotosPreviewController) -> Void)?
     
     fileprivate var collectionView: UICollectionView!
     fileprivate let itemPadding: CGFloat = 20.0
@@ -22,6 +22,9 @@ class PhotosPreviewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    deinit {
+        print("\(self) deinit")
     }
 }
 
@@ -57,12 +60,7 @@ extension PhotosPreviewController {
         }
     }
     func chooseClick() {
-        chooseButton.isSelected = !chooseButton.isSelected
-        assetModels[currentIndex].isSelect = chooseButton.isSelected
-        
-        var model = assetModels[currentIndex]
-        model.isSelect = chooseButton.isSelected
-        chooseAction?(model, currentIndex)
+        chooseAction?(currentIndex, chooseButton, self)
     }
 }
 

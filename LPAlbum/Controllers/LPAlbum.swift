@@ -186,7 +186,7 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.set(model)
             cell.iconClickAction = {[weak self] in
                 guard let `self` = self else { return }
-                guard self.checkoutMaxCount(willselect: !$0) else { return }
+                guard self.checkoutMaxCount(willselect: !$0, show: self) else { return }
                 var newModel = model
                 newModel.isSelect = !$0
                 self.albumModels = self.albumModels.change(assetModel: newModel)
@@ -203,19 +203,27 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if config.hasCamera && indexPath.row == 0 {
-            guard checkoutMaxCount(willselect: true) else { return }
+            guard checkoutMaxCount(willselect: true, show: self) else { return }
             AuthorizationTool.cameraRequestAuthorization{
                 $0 == .authorized ? self.takePhoto() : self.errorBlock?(self, AlbumError.noCameraPermission)
             }
         }else{
             let previewVc = PhotosPreviewController()
-            previewVc.assetModels = albumModels[currentAlbumIndex].assetModels
+            let assetModels = albumModels[currentAlbumIndex].assetModels
+            previewVc.assetModels = assetModels
             previewVc.currentIndex = config.hasCamera ? indexPath.row - 1 : indexPath.row
-            previewVc.chooseAction = {[weak self] in
+            previewVc.chooseAction = {[weak self] (index, button, vc) in
                 guard let `self` = self else { return }
-                self.albumModels = self.albumModels.change(assetModel: $0)
-                let currentIndex =  self.config.hasCamera ? $1 + 1 : $1
-                self.collectionView.reloadItems(at: [IndexPath(row: currentIndex, section: 0)])
+               
+                let willselect = !button.isSelected
+                guard self.checkoutMaxCount(willselect: willselect, show: vc) else { return }
+                
+                button.isSelected = willselect
+                vc.assetModels[index].isSelect = willselect
+                self.albumModels = self.albumModels.change(assetModel: vc.assetModels[index])
+                
+                let cellIndex =  self.config.hasCamera ? index + 1 : index
+                self.collectionView.reloadItems(at: [IndexPath(row: cellIndex, section: 0)])
             }
             navigationController?.pushViewController(previewVc, animated: true)
         }
@@ -231,9 +239,9 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
         present(picker, animated: true, completion: nil)
     }
     
-    func checkoutMaxCount(willselect: Bool) -> Bool {
+    func checkoutMaxCount(willselect: Bool, show vc: UIViewController) -> Bool {
         if self.config.maxSelectCount == self.albumModels[0].selectCount && willselect {
-            self.errorBlock?(self,AlbumError.moreThanLargestChoiceCount)
+            self.errorBlock?(vc,AlbumError.moreThanLargestChoiceCount)
             return false
         }
         return true
