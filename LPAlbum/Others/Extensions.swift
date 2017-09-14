@@ -11,6 +11,8 @@ import Foundation
 extension CGFloat {
     static var screenWidth = UIScreen.main.bounds.width
     static var screenHeight = UIScreen.main.bounds.height
+    
+    var roundInt: Int { return Int(self.rounded()) }
 }
 
 extension Int {
@@ -36,6 +38,15 @@ extension Bundle {
         guard let bundle = Bundle(path: albumBundle.bundlePath + "/Images"),
             let path = bundle.path(forResource: imageName, ofType: "png") else { return nil }
         return UIImage(contentsOfFile: path)
+    }
+    
+    static func localizedString(key: String) -> String {
+        guard let code = Locale.current.languageCode else { return key }
+        var language = "zh"
+        if code == "en" { language = "en" }
+        guard let path = albumBundle.path(forResource: language, ofType: "lproj"),
+              let bundle = Bundle(path: path) else { return key }
+        return bundle.localizedString(forKey: key, value: nil, table: nil)
     }
 }
 
@@ -144,6 +155,10 @@ extension String {
     
     var isAvailableAlbum: Bool {
         return !(isEmpty || contains("Hidden") || contains("已隐藏") || contains("Deleted") || contains("最近删除"))
+    }
+    
+    static func local(_ key: String) -> String {
+        return Bundle.localizedString(key: key)
     }
 }
 

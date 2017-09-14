@@ -17,7 +17,7 @@
 		731A48291F623B3E00AC5513 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 731A48271F623B3E00AC5513 /* LaunchScreen.storyboard */; };
 		7337B6741F6850C800F1FE84 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7337B6731F6850C800F1FE84 /* PhotoCell.swift */; };
 		737FCD111F6241CC00C44C3D /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737FCD101F6241CC00C44C3D /* AlbumViewController.swift */; };
-		738C26041F67934D00040E4E /* AlbumDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C26031F67934D00040E4E /* AlbumDetailController.swift */; };
+		738C26041F67934D00040E4E /* PhotosPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C26031F67934D00040E4E /* PhotosPreviewController.swift */; };
 		738C26061F67C94500040E4E /* TakeCameraCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C26051F67C94500040E4E /* TakeCameraCell.swift */; };
 		738C260B1F67E43200040E4E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738C260A1F67E43200040E4E /* Extensions.swift */; };
 		739180FB1F6677BE001EACFF /* LPAlbum.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 731A47FE1F623AF000AC5513 /* LPAlbum.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -32,6 +32,7 @@
 		7391811D1F66A33C001EACFF /* DropMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391811B1F66A33C001EACFF /* DropMenuView.swift */; };
 		7391811F1F66B3A4001EACFF /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7391811C1F66A33C001EACFF /* TitleView.swift */; };
 		73A85A881F68EDF000C3096E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A85A871F68EDF000C3096E /* Config.swift */; };
+		73BF7BF01F6A24E400A0BEC1 /* PhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BF7BEF1F6A24E400A0BEC1 /* PhotoPreviewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +74,7 @@
 		731A482A1F623B3E00AC5513 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7337B6731F6850C800F1FE84 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		737FCD101F6241CC00C44C3D /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
-		738C26031F67934D00040E4E /* AlbumDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumDetailController.swift; sourceTree = "<group>"; };
+		738C26031F67934D00040E4E /* PhotosPreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosPreviewController.swift; sourceTree = "<group>"; };
 		738C26051F67C94500040E4E /* TakeCameraCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TakeCameraCell.swift; sourceTree = "<group>"; };
 		738C260A1F67E43200040E4E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		739181071F669FC9001EACFF /* LPAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LPAlbum.swift; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 		7391811B1F66A33C001EACFF /* DropMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropMenuView.swift; sourceTree = "<group>"; };
 		7391811C1F66A33C001EACFF /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		73A85A871F68EDF000C3096E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		73BF7BEF1F6A24E400A0BEC1 /* PhotoPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPreviewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +178,7 @@
 			children = (
 				739181071F669FC9001EACFF /* LPAlbum.swift */,
 				739181081F669FC9001EACFF /* LPNavigationController.swift */,
-				738C26031F67934D00040E4E /* AlbumDetailController.swift */,
+				738C26031F67934D00040E4E /* PhotosPreviewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -202,6 +204,7 @@
 				7391811C1F66A33C001EACFF /* TitleView.swift */,
 				739181191F669FD2001EACFF /* AlbumCollectionCell.swift */,
 				738C26051F67C94500040E4E /* TakeCameraCell.swift */,
+				73BF7BEF1F6A24E400A0BEC1 /* PhotoPreviewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -357,9 +360,10 @@
 			files = (
 				739181091F669FC9001EACFF /* LPAlbum.swift in Sources */,
 				7391811D1F66A33C001EACFF /* DropMenuView.swift in Sources */,
-				738C26041F67934D00040E4E /* AlbumDetailController.swift in Sources */,
+				738C26041F67934D00040E4E /* PhotosPreviewController.swift in Sources */,
 				7391811A1F669FD2001EACFF /* AlbumCollectionCell.swift in Sources */,
 				738C26061F67C94500040E4E /* TakeCameraCell.swift in Sources */,
+				73BF7BF01F6A24E400A0BEC1 /* PhotoPreviewCell.swift in Sources */,
 				739181131F669FCE001EACFF /* AlbumManager.swift in Sources */,
 				73A85A881F68EDF000C3096E /* Config.swift in Sources */,
 				739181141F669FCE001EACFF /* AuthorizationTool.swift in Sources */,

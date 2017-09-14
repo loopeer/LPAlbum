@@ -4,7 +4,20 @@
 //
 //  Created by 郜宇 on 2017/9/8.
 //  Copyright © 2017年 Loopeer. All rights reserved.
-//  TODO: 1. add CompleteSelectAssetsBlock
+/**
+   TODO: 1. add CompleteSelectAssetsBlock
+         2. add Photo Cache
+         3. 文本国际化
+         4. 图片详情展示
+         5. 选取单个图片的情形
+         6. 支持裁剪(正方形, 圆形)
+         7. take photo statusBarAnimation 
+         8. 是否要加Observer
+         9. 完善demo(照片墙, 权限跳转)
+        10. 加一些动画效果
+        11. 添加注释
+        12. 是否内部对图片处理画一遍
+ */
 
 import UIKit
 import Photos
@@ -20,9 +33,6 @@ public class LPAlbum: UIViewController {
     fileprivate var completeSelectImagesBlock: CompleteSelectImagesBlock?
     fileprivate var errorBlock: ErrorBlock?
     fileprivate var targetSizeBlock: TargetSizeBlock?
-    
-    fileprivate var cameraStatus: AVAuthorizationStatus!
-    fileprivate var albumStatus: PHAuthorizationStatus!
     
     fileprivate var albumManager: AlbumManager!
     fileprivate var collectionView: UICollectionView!
@@ -117,8 +127,8 @@ public class LPAlbum: UIViewController {
 extension LPAlbum {
     
     func setupUI() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancel))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .plain, target: self, action: #selector(confirm))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: String.local("取消"), style: .plain, target: self, action: #selector(cancel))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: String.local("完成"), style: .plain, target: self, action: #selector(confirm))
         
         titleView = TitleView(frame: .zero)
         navigationItem.titleView = titleView
@@ -197,6 +207,17 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
             AuthorizationTool.cameraRequestAuthorization{
                 $0 == .authorized ? self.takePhoto() : self.errorBlock?(self, AlbumError.noCameraPermission)
             }
+        }else{
+            let previewVc = PhotosPreviewController()
+            previewVc.assetModels = albumModels[currentAlbumIndex].assetModels
+            previewVc.currentIndex = config.hasCamera ? indexPath.row - 1 : indexPath.row
+            previewVc.chooseAction = {[weak self] in
+                guard let `self` = self else { return }
+                self.albumModels = self.albumModels.change(assetModel: $0)
+                let currentIndex =  self.config.hasCamera ? $1 + 1 : $1
+                self.collectionView.reloadItems(at: [IndexPath(row: currentIndex, section: 0)])
+            }
+            navigationController?.pushViewController(previewVc, animated: true)
         }
     }
     

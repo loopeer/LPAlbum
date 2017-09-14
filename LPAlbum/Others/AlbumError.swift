@@ -16,10 +16,10 @@ public enum AlbumError: Error {
     
     public var localizedDescription: String {
         switch self {
-        case .noAlbumPermission: return "没有相册访问权限"
-        case .noCameraPermission: return "没有相机访问权限"
-        case .moreThanLargestChoiceCount: return "超出了可选择图片数量的上限"
-        case .savePhotoError: return "保存图片失败"
+        case .noAlbumPermission: return String.local("没有相册访问权限")
+        case .noCameraPermission: return String.local("没有摄像头访问权限")
+        case .moreThanLargestChoiceCount: return String.local("达到了图片选择最大数量")
+        case .savePhotoError: return String.local("保存图片失败")
         }
     }
 }
