@@ -152,11 +152,11 @@ extension UIControl {
 }
 
 extension String {
-    
+    /// 是否是有效的相册
     var isAvailableAlbum: Bool {
         return !(isEmpty || contains("Hidden") || contains("已隐藏") || contains("Deleted") || contains("最近删除"))
     }
-    
+    /// 国际化文本
     static func local(_ key: String) -> String {
         return Bundle.localizedString(key: key)
     }

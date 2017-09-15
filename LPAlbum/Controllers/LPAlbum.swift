@@ -6,16 +6,13 @@
 //  Copyright © 2017年 Loopeer. All rights reserved.
 /**
    TODO: 1. add CompleteSelectAssetsBlock
-         2. add Photo Cache
-         4. 图片详情zoom
-         5. 选取单个图片的情形
-         6. 支持裁剪(正方形, 圆形)
-         7. take photo statusBarAnimation 
-         8. 是否要加Observer, 如果有Observer, 图片添加或者删除了, 要响应的添加或删除该图片的缓存
-         9. 完善demo(照片墙, 权限跳转)
-        10. 加一些动画效果
-        11. 添加注释
-        12. 是否内部对图片处理画一遍
+         2. 选取单个图片的情形
+         3. 支持裁剪(正方形, 圆形)
+         4. 是否要加Observer, 如果有Observer, 图片添加或者删除了, 要响应的添加或删除该图片的缓存
+         5. 完善demo(照片墙, 权限跳转)
+         6. 加一些动画效果
+         7. 添加注释
+         8. 是否内部对图片处理画一遍
  */
 
 import UIKit
@@ -89,10 +86,6 @@ public class LPAlbum: UIViewController {
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    public override func loadView() {
-        super.loadView()
     }
     
     public override func viewDidLoad() {

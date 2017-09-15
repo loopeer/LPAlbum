@@ -14,13 +14,14 @@ public class AlbumManager {
     static let imageManager = PHCachingImageManager()
     
     public class func getAlbums() -> [AlbumModel] {
-        //获取智能相册
+        // 获取智能相册
         let smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
-        //获取用户创建的相册
+        // 获取用户创建的相册
         let userAlbums = PHAssetCollection.fetchTopLevelUserCollections(with: nil)
         // 遍历相册
         let smartModels = enumerateAlbum(album: smartAlbums as! PHFetchResult<PHCollection>)
         let userModels = enumerateAlbum(album: userAlbums)
+        // 数量排序
         return (smartModels + userModels).sorted{ $0.count > $1.count }
     }
     
