@@ -151,7 +151,7 @@ extension LPAlbum {
         collectionView.register(AlbumCollectionCell.self, forCellWithReuseIdentifier: AlbumCollectionCell.description())
         collectionView.register(TakeCameraCell.self, forCellWithReuseIdentifier: TakeCameraCell.description())
 
-        menuView = DropMenuView(frame: view.bounds, albums: albumModels)
+        menuView = DropMenuView(frame: CGRect(x: 0, y: 64, width: .screenWidth, height: .screenHeight - 64), albums: albumModels)
         view.addSubview(menuView)
     }
     
