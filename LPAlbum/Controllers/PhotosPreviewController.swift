@@ -38,7 +38,7 @@ extension PhotosPreviewController {
     func setupUI(){
         // 将collectionView多余的部分切到
         view.clipsToBounds = true
-    
+        automaticallyAdjustsScrollViewInsets = false
         chooseButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         chooseButton.setBackgroundImage(LPAlbum.Style.selectedBox, for: .selected)
         chooseButton.setBackgroundImage(LPAlbum.Style.normalBox, for: .normal)
@@ -46,7 +46,7 @@ extension PhotosPreviewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: chooseButton)
         
         let layout = UICollectionViewFlowLayout()
-        itemSize = CGSize(width: view.bounds.width + 20, height: view.bounds.height - 64)
+        itemSize = CGSize(width: view.bounds.width + 20, height: view.bounds.height)
         layout.itemSize = itemSize
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
@@ -97,6 +97,11 @@ extension PhotosPreviewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoPreviewCell.description(), for: indexPath) as! PhotoPreviewCell
         cell.assetModel = assetModels[indexPath.row]
+        cell.singleTapAction = { [weak self] in
+            guard let `self` = self else { return }
+            let isHidden = self.navigationController?.isNavigationBarHidden ?? false
+            self.navigationController?.setNavigationBarHidden(!isHidden, animated: true)
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

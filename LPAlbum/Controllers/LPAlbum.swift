@@ -148,7 +148,7 @@ extension LPAlbum {
         layout.itemSize = CGSize(width: photoW, height: photoW)
         layout.minimumLineSpacing = config.photoPadding
         layout.minimumInteritemSpacing = config.photoPadding
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - 64),
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height),
                                           collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self

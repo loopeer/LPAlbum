@@ -21,6 +21,7 @@ class PhotoPreviewCell: UICollectionViewCell {
         }
     }
     func resetZoomScale() { scrollView.setZoomScale(1.0, animated: false) }
+    var singleTapAction: (() -> Void)?
     
     fileprivate let photoView = UIImageView()
     fileprivate let scrollView = UIScrollView()
@@ -43,8 +44,8 @@ class PhotoPreviewCell: UICollectionViewCell {
         scrollView.addSubview(photoView)
         contentView.addSubview(scrollView)
         
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(singleTapAction))
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapAction))
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(singleTapClick))
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapClick))
         doubleTap.numberOfTapsRequired = 2
         singleTap.require(toFail: doubleTap)
         contentView.addGestureRecognizer(singleTap)
@@ -52,11 +53,9 @@ class PhotoPreviewCell: UICollectionViewCell {
         
     }
 
-    func singleTapAction() {
-        
-    }
+    func singleTapClick() { singleTapAction?() }
     
-    func doubleTapAction(ges: UITapGestureRecognizer) {
+    func doubleTapClick(ges: UITapGestureRecognizer) {
         if scrollView.zoomScale > 1.0 {
             scrollView.contentInset = .zero
             scrollView.setZoomScale(1.0, animated: true)

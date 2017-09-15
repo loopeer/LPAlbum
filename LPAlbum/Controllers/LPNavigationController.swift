@@ -16,7 +16,7 @@ class LPNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBar.isTranslucent = false
+        navigationBar.isTranslucent = true
         modalPresentationCapturesStatusBarAppearance = true
     }
     
