@@ -25,7 +25,7 @@ public class AlbumManager {
     }
     
     // 根据Asset获取photo
-    public class func getPhoto(asset: PHAsset, targetSize: CGSize, option: PHImageRequestOptions? = nil, resultHandler: @escaping ((UIImage?, [AnyHashable: Any]?) -> Void)) {
+    public class func getPhoto(asset: PHAsset, targetSize: CGSize, option: PHImageRequestOptions? = nil, resultHandler: @escaping ((UIImage?, [AnyHashable: Any]?) -> Void)) -> PHImageRequestID {
         
         let defalutOption = PHImageRequestOptions()
         defalutOption.resizeMode = .fast
@@ -33,11 +33,11 @@ public class AlbumManager {
         
         let size = CGSize(width: targetSize.width * UIScreen.main.scale,
                          height: targetSize.height * UIScreen.main.scale)
-        AlbumManager.imageManager.requestImage(for: asset,
-                                  targetSize: size,
-                                  contentMode: .aspectFill,
-                                  options: option ?? defalutOption,
-                                  resultHandler: resultHandler)
+        return AlbumManager.imageManager.requestImage(for: asset,
+                                                      targetSize: size,
+                                                      contentMode: .aspectFill,
+                                                      options: option ?? defalutOption,
+                                                      resultHandler: resultHandler)
     }
 
     private class func enumerateAlbum(album: PHFetchResult<PHCollection>) -> [AlbumModel] {

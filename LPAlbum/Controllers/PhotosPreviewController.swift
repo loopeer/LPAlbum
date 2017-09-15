@@ -23,6 +23,7 @@ class PhotosPreviewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        refreshNavigation()
         addCache()
     }
     
@@ -41,7 +42,6 @@ extension PhotosPreviewController {
         chooseButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         chooseButton.setBackgroundImage(LPAlbum.Style.selectedBox, for: .selected)
         chooseButton.setBackgroundImage(LPAlbum.Style.normalBox, for: .normal)
-        chooseButton.isSelected = assetModels[currentIndex].isSelect
         chooseButton.addTarget(self, action: #selector(chooseClick), for: .touchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: chooseButton)
         
@@ -62,6 +62,11 @@ extension PhotosPreviewController {
         collectionView.performBatchUpdates(nil){ _ in
             self.collectionView.setContentOffset(CGPoint(x: self.itemSize.width * self.currentIndex.cgFloat, y: 0), animated: false)
         }
+    }
+    
+    func refreshNavigation(){
+        chooseButton.isSelected = assetModels[currentIndex].isSelect
+        title = (currentIndex + 1).description + "/" + assetModels.count.description
     }
     
     func addCache() {
@@ -100,7 +105,7 @@ extension PhotosPreviewController: UICollectionViewDelegate, UICollectionViewDat
    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         currentIndex = (scrollView.contentOffset.x / scrollView.bounds.width).roundInt
-        chooseButton.isSelected = assetModels[currentIndex].isSelect
+        refreshNavigation()
     }
 }
 
