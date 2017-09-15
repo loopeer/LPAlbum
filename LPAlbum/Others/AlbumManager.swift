@@ -25,6 +25,7 @@ public class AlbumManager {
     }
     
     // 根据Asset获取photo
+    @discardableResult
     public class func getPhoto(asset: PHAsset, targetSize: CGSize, option: PHImageRequestOptions? = nil, resultHandler: @escaping ((UIImage?, [AnyHashable: Any]?) -> Void)) -> PHImageRequestID {
         
         let defalutOption = PHImageRequestOptions()
