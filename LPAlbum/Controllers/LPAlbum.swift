@@ -7,12 +7,11 @@
 /**
    TODO: 1. add CompleteSelectAssetsBlock
          2. add Photo Cache
-         3. 文本国际化
-         4. 图片详情展示
+         4. 图片详情zoom
          5. 选取单个图片的情形
          6. 支持裁剪(正方形, 圆形)
          7. take photo statusBarAnimation 
-         8. 是否要加Observer
+         8. 是否要加Observer, 如果有Observer, 图片添加或者删除了, 要响应的添加或删除该图片的缓存
          9. 完善demo(照片墙, 权限跳转)
         10. 加一些动画效果
         11. 添加注释
@@ -41,7 +40,15 @@ public class LPAlbum: UIViewController {
     
     fileprivate var currentAlbumIndex: Int = 0
     fileprivate var albumModels = [AlbumModel]()
-    
+    fileprivate var allAssets = [PHAsset]() {
+        didSet{
+            //如果有Observer, 图片添加或者删除了, 要响应的添加或删除该图片的缓存
+            let itemSize = (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
+            let scale = UIScreen.main.scale
+            let targetSize = CGSize(width: itemSize.width * scale, height: itemSize.height * scale)
+            AlbumManager.imageManager.startCachingImages(for: allAssets, targetSize: targetSize, contentMode: .aspectFill, options: nil)
+        }
+    }
     
     @discardableResult
     public class func show(at: UIViewController, set: SetConfigBlock? = nil) -> LPAlbum {
@@ -93,6 +100,8 @@ public class LPAlbum: UIViewController {
         
         albumModels = AlbumManager.getAlbums()
         setupUI()
+        allAssets = albumModels[0].assetModels.map{ $0.asset }
+        
         titleView.clickAction = { [weak self] in
             $0.isSelected = !$0.isSelected
             $0.isSelected ?

@@ -18,13 +18,17 @@ class PhotosPreviewController: UIViewController {
     fileprivate var collectionView: UICollectionView!
     fileprivate let itemPadding: CGFloat = 20.0
     fileprivate let chooseButton = UIButton()
+    fileprivate var itemSize: CGSize!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        addCache()
     }
+    
     deinit {
         print("\(self) deinit")
+        removeCache()
     }
 }
 
@@ -42,7 +46,7 @@ extension PhotosPreviewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: chooseButton)
         
         let layout = UICollectionViewFlowLayout()
-        let itemSize = CGSize(width: view.bounds.width + 20, height: view.bounds.height - 64)
+        itemSize = CGSize(width: view.bounds.width + 20, height: view.bounds.height - 64)
         layout.itemSize = itemSize
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
@@ -56,9 +60,25 @@ extension PhotosPreviewController {
         view.addSubview(collectionView)
         collectionView.register(PhotoPreviewCell.self, forCellWithReuseIdentifier: PhotoPreviewCell.description())
         collectionView.performBatchUpdates(nil){ _ in
-            self.collectionView.setContentOffset(CGPoint(x: itemSize.width * self.currentIndex.cgFloat, y: 0), animated: false)
+            self.collectionView.setContentOffset(CGPoint(x: self.itemSize.width * self.currentIndex.cgFloat, y: 0), animated: false)
         }
     }
+    
+    func addCache() {
+        let scale = UIScreen.main.scale
+        AlbumManager.imageManager.startCachingImages(for: assetModels.map{ $0.asset },
+                                                     targetSize: CGSize(width: itemSize.width * scale, height: itemSize.height * scale),
+                                                     contentMode: .aspectFill,
+                                                     options: nil)
+    }
+    func removeCache() {
+        let scale = UIScreen.main.scale
+        AlbumManager.imageManager.stopCachingImages(for: assetModels.map{ $0.asset },
+                                                    targetSize: CGSize(width: itemSize.width * scale, height: itemSize.height * scale),
+                                                    contentMode: .aspectFill,
+                                                    options: nil)
+    }
+    
     func chooseClick() {
         chooseAction?(currentIndex, chooseButton, self)
     }
