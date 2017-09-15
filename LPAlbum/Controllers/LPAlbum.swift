@@ -5,14 +5,12 @@
 //  Created by 郜宇 on 2017/9/8.
 //  Copyright © 2017年 Loopeer. All rights reserved.
 /**
-   TODO: 1. add CompleteSelectAssetsBlock
+   TODO: 1. add CompleteSelectAssetsBlock 可以选择原图
          2. 选取单个图片的情形
          3. 支持裁剪(正方形, 圆形)
          4. 是否要加Observer, 如果有Observer, 图片添加或者删除了, 要响应的添加或删除该图片的缓存
-         5. 完善demo(照片墙, 权限跳转)
-         6. 加一些动画效果
-         7. 添加注释
-         8. 是否内部对图片处理画一遍
+         5. 加一些动画效果
+         6. 是否内部对图片处理画一遍
  */
 
 import UIKit
@@ -30,7 +28,6 @@ public class LPAlbum: UIViewController {
     fileprivate var errorBlock: ErrorBlock?
     fileprivate var targetSizeBlock: TargetSizeBlock?
     
-    fileprivate var albumManager: AlbumManager!
     fileprivate var collectionView: UICollectionView!
     fileprivate var titleView: TitleView!
     fileprivate var menuView: DropMenuView!
