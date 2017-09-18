@@ -18,13 +18,17 @@ import Photos
 
 public typealias SetConfigBlock = ((inout LPAlbum.Config) -> Void)
 public typealias CompleteSelectImagesBlock = (([UIImage]) -> Void)
+public typealias CompleteSelectAssetsBlock = (([PHAsset]) -> Void)
 public typealias ErrorBlock = ((UIViewController ,AlbumError) -> Void)
 public typealias TargetSizeBlock = ((CGSize) -> CGSize)
+
 
 public class LPAlbum: UIViewController {
  
     fileprivate let config: Config
     fileprivate var completeSelectImagesBlock: CompleteSelectImagesBlock?
+    fileprivate var completeSelectAssetsBlock: CompleteSelectAssetsBlock?
+
     fileprivate var errorBlock: ErrorBlock?
     fileprivate var targetSizeBlock: TargetSizeBlock?
     
@@ -162,12 +166,20 @@ extension LPAlbum {
             let option = PHImageRequestOptions()
             option.isSynchronous = true
             option.resizeMode = .exact
-            AlbumManager.getPhoto(asset: asset, targetSize: targetSize, option: option, resultHandler: {[weak self] (image, _) in
-                if image != nil { result.append(image!) }
-                if result.count == assets.count {
-                    self?.completeSelectImagesBlock?(result)
-                    self?.cancel() }
-            })
+            DispatchQueue.global().async {
+                AlbumManager.getPhoto(asset: asset,
+                                      targetSize: targetSize,
+                                      adaptScale: false,
+                                      option: option,
+                                      contentMode: .aspectFit,
+                                      resultHandler: {[weak self] (image, _) in
+                    if image != nil { result.append(image!) }
+                    if result.count == assets.count {
+                        DispatchQueue.main.async { self?.completeSelectImagesBlock?(result) }
+                    }
+                })
+            }
+            cancel()
         }
     }
 }
@@ -233,7 +245,7 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
         guard UIImagePickerController.isSourceTypeAvailable(sourceType) else { fatalError("摄像头不可用") }
         let picker = UIImagePickerController()
         picker.sourceType = sourceType
-        picker.allowsEditing = true
+        picker.allowsEditing = false
         picker.delegate = self
         present(picker, animated: true, completion: nil)
     }

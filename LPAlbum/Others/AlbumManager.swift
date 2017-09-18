@@ -27,17 +27,23 @@ public class AlbumManager {
     
     // 根据Asset获取photo
     @discardableResult
-    public class func getPhoto(asset: PHAsset, targetSize: CGSize, option: PHImageRequestOptions? = nil, resultHandler: @escaping ((UIImage?, [AnyHashable: Any]?) -> Void)) -> PHImageRequestID {
+    public class func getPhoto(asset: PHAsset,
+                               targetSize: CGSize,
+                               adaptScale: Bool = true,
+                               option: PHImageRequestOptions? = nil,
+                               contentMode: PHImageContentMode = .aspectFill,
+                               resultHandler: @escaping ((UIImage?, [AnyHashable: Any]?) -> Void))
+        -> PHImageRequestID {
         
         let defalutOption = PHImageRequestOptions()
         defalutOption.resizeMode = .fast
         defalutOption.deliveryMode = .opportunistic
         
-        let size = CGSize(width: targetSize.width * UIScreen.main.scale,
-                         height: targetSize.height * UIScreen.main.scale)
+        let adaptSize = CGSize(width: targetSize.width * UIScreen.main.scale,
+                               height: targetSize.height * UIScreen.main.scale)
         return AlbumManager.imageManager.requestImage(for: asset,
-                                                      targetSize: size,
-                                                      contentMode: .aspectFill,
+                                                      targetSize: adaptScale ? adaptSize : targetSize,
+                                                      contentMode: contentMode,
                                                       options: option ?? defalutOption,
                                                       resultHandler: resultHandler)
     }

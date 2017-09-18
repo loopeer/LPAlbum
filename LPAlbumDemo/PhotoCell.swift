@@ -17,7 +17,7 @@ class PhotoCell: UICollectionViewCell {
         
         photoView.frame = bounds
         photoView.clipsToBounds = true
-        photoView.contentMode = .scaleAspectFill
+        photoView.contentMode = .scaleAspectFit
         contentView.addSubview(photoView)
     }
     

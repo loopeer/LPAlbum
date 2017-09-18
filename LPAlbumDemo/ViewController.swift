@@ -39,12 +39,13 @@ class ViewController: UIViewController {
             $0.hasCamera = true
             $0.maxSelectCount = 9 - self.photos.count
         }.targeSize({ (size) -> CGSize in
-            return CGSize(width: 80, height: 80)
+            return CGSize(width: 240, height: 240)
         }).error {(vc, error) in
             vc.show(message: error.localizedDescription)
         }.complete { [weak self](images) in
             self?.photos.append(contentsOf: images)
             self?.collectionView.reloadData()
+            _ = images.map{ print($0.size) }
         }
     }
     func clean() {
