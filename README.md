@@ -112,11 +112,11 @@ LPAlbum.show(at: self)  {
 
 ## Features
 
-- [x] Support for iCloud 
-- [x] Support for cutting
-- [x] Support for selecting a single image
-- [x] Support for choosing the original image
-- [x] Add preview of the selected photos
+- [ ] Support for iCloud 
+- [ ] Support for cutting
+- [ ] Support for selecting a single image
+- [ ] Support for choosing the original image
+- [ ] Add preview of the selected photos
 
 
 ## Installation
