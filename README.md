@@ -5,10 +5,10 @@
 ![Xcode 8.3+](https://img.shields.io/badge/Xcode-8.3%2B-blue.svg)
 ![iOS 8.0+](https://img.shields.io/badge/iOS-8.0%2B-blue.svg)
 ![Swift 3.1+](https://img.shields.io/badge/Swift-3.0%2B-orange.svg)
-[![Version](https://img.shields.io/cocoapods/v/AttributedStringWrapper.svg?style=flat)](https://cocoapods.org/pods/LPAlbum)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/loopeer/LPAlbum)
-<a href="http://cocoapods.org/pods/AttributedStringWrapper"><img src="https://img.shields.io/cocoapods/at/AttributedStringWrapper.svg?label=Apps%20Using%20AttributedStringWrapper&colorB=28B9FE"></a>
-<a href="http://cocoapods.org/pods/AttributedStringWrapper"><img src="https://img.shields.io/cocoapods/dt/AttributedStringWrapper.svg?label=Total%20Downloads&colorB=28B9FE"></a>
+<!--[![Version](https://img.shields.io/cocoapods/v/AttributedStringWrapper.svg?style=flat)](https://cocoapods.org/pods/LPAlbum)-->
+<!--[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/loopeer/LPAlbum)-->
+<!--<a href="http://cocoapods.org/pods/AttributedStringWrapper"><img src="https://img.shields.io/cocoapods/at/AttributedStringWrapper.svg?label=Apps%20Using%20AttributedStringWrapper&colorB=28B9FE"></a>-->
+<!--<a href="http://cocoapods.org/pods/AttributedStringWrapper"><img src="https://img.shields.io/cocoapods/dt/AttributedStringWrapper.svg?label=Total%20Downloads&colorB=28B9FE"></a>-->
 
 
 **LPAlbum** is a simple photo album 
@@ -108,6 +108,15 @@ LPAlbum.show(at: self)  {
 }
 
 ```
+
+
+## Features
+
+- [x] Support for iCloud 
+- [x] Support for cutting
+- [x] Support for selecting a single image
+- [x] Support for choosing the original image
+- [x] Add preview of the selected photos
 
 
 ## Installation
