@@ -182,6 +182,27 @@ extension LPAlbum {
             cancel()
         }
     }
+    
+    func cellDidSelectForPreviewViewController(indexPath: IndexPath) -> UIViewController{
+        let previewVc = PhotosPreviewController()
+        let assetModels = albumModels[currentAlbumIndex].assetModels
+        previewVc.assetModels = assetModels
+        previewVc.currentIndex = config.hasCamera ? indexPath.row - 1 : indexPath.row
+        previewVc.chooseAction = {[weak self] (index, button, vc) in
+            guard let `self` = self else { return }
+            
+            let willselect = !button.isSelected
+            guard self.checkoutMaxCount(willselect: willselect, show: vc) else { return }
+            
+            button.isSelected = willselect
+            vc.assetModels[index].isSelect = willselect
+            self.albumModels = self.albumModels.change(assetModel: vc.assetModels[index])
+            
+            let cellIndex =  self.config.hasCamera ? index + 1 : index
+            self.collectionView.reloadItems(at: [IndexPath(row: cellIndex, section: 0)])
+        }
+        return previewVc
+    }
 }
 
 
@@ -203,6 +224,10 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
                 self.albumModels = self.albumModels.change(assetModel: newModel)
                 self.collectionView.reloadItems(at: [indexPath])
             }
+            if #available(iOS 9.0, *) {
+                guard traitCollection.forceTouchCapability == .available else { return cell }
+                registerForPreviewing(with: self, sourceView: cell)
+            }
             return cell
         }
     }
@@ -219,23 +244,7 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
                 $0 == .authorized ? self.takePhoto() : self.errorBlock?(self, AlbumError.noCameraPermission)
             }
         }else{
-            let previewVc = PhotosPreviewController()
-            let assetModels = albumModels[currentAlbumIndex].assetModels
-            previewVc.assetModels = assetModels
-            previewVc.currentIndex = config.hasCamera ? indexPath.row - 1 : indexPath.row
-            previewVc.chooseAction = {[weak self] (index, button, vc) in
-                guard let `self` = self else { return }
-               
-                let willselect = !button.isSelected
-                guard self.checkoutMaxCount(willselect: willselect, show: vc) else { return }
-                
-                button.isSelected = willselect
-                vc.assetModels[index].isSelect = willselect
-                self.albumModels = self.albumModels.change(assetModel: vc.assetModels[index])
-                
-                let cellIndex =  self.config.hasCamera ? index + 1 : index
-                self.collectionView.reloadItems(at: [IndexPath(row: cellIndex, section: 0)])
-            }
+            let previewVc = cellDidSelectForPreviewViewController(indexPath: indexPath)
             navigationController?.pushViewController(previewVc, animated: true)
         }
     }
@@ -281,6 +290,22 @@ extension LPAlbum: UIImagePickerControllerDelegate, UINavigationControllerDelega
                 self.dismiss(animated: true, completion: nil)
             }
         }
+    }
+}
+
+
+extension LPAlbum: UIViewControllerPreviewingDelegate {
+    public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let cell = previewingContext.sourceView as? AlbumCollectionCell,
+              let indexPath = collectionView.indexPath(for: cell) else { return nil }
+        let previewVc = cellDidSelectForPreviewViewController(indexPath: indexPath)
+        previewingContext.sourceRect = previewingContext.sourceView.bounds
+        return previewVc
+    }
+    
+    public func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }
 
