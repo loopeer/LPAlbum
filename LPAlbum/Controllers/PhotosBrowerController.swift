@@ -8,12 +8,12 @@
 
 import UIKit
 
-class PhotosPreviewController: UIViewController {
+class PhotosBrowerController: UIViewController {
 
     var assetModels: [AssetModel]!
     var currentIndex: Int!
     
-    var chooseAction: ((Int, UIButton, PhotosPreviewController) -> Void)?
+    var chooseAction: ((Int, UIButton, PhotosBrowerController) -> Void)?
     
     fileprivate var collectionView: UICollectionView!
     fileprivate let itemPadding: CGFloat = 20.0
@@ -33,7 +33,7 @@ class PhotosPreviewController: UIViewController {
     }
 }
 
-extension PhotosPreviewController {
+extension PhotosBrowerController {
     
     func setupUI(){
         // 将collectionView多余的部分切到
@@ -89,7 +89,7 @@ extension PhotosPreviewController {
     }
 }
 
-extension PhotosPreviewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PhotosBrowerController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return assetModels.count
     }

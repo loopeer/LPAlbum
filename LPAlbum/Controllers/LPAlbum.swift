@@ -193,7 +193,7 @@ extension LPAlbum {
     }
     
     func cellDidSelectForPreviewViewController(indexPath: IndexPath) -> UIViewController{
-        let previewVc = PhotosPreviewController()
+        let previewVc = PhotosBrowerController()
         let assetModels = albumModels[currentAlbumIndex].assetModels
         previewVc.assetModels = assetModels
         previewVc.currentIndex = config.hasCamera ? indexPath.row - 1 : indexPath.row
