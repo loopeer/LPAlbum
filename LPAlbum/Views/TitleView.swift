@@ -10,6 +10,8 @@ import UIKit
 
 class TitleView: UIButton {
     
+    override var intrinsicContentSize: CGSize { return UILayoutFittingExpandedSize }
+    
     override var isSelected: Bool {
         didSet{
             UIView.animate(withDuration: 0.25) {
@@ -22,6 +24,7 @@ class TitleView: UIButton {
         didSet{
             setTitle(title, for: .normal)
             sizeToFit()
+            bounds = CGRect(x: 0, y: 0, width: min(bounds.width + 10, 300) , height: bounds.height)
         }
     }
     
@@ -32,7 +35,7 @@ class TitleView: UIButton {
         setImage(LPAlbum.Style.arrowImage, for: .normal)
         setTitleColor(LPAlbum.Style.barTitleColor, for: .normal)
         titleLabel?.font = UIFont.systemFont(ofSize: 17)
-        bounds = CGRect(origin: .zero, size: CGSize(width: 200, height: 40))
+        bounds = CGRect(origin: .zero, size: CGSize(width: 300, height: 40))
         addTarget(self, action: #selector(click), for: .touchUpInside)
     }
     
@@ -46,7 +49,6 @@ class TitleView: UIButton {
         super.layoutSubviews()
         imageEdgeInsets = UIEdgeInsets(top: 0, left: (titleLabel?.frame.width ?? 0) + 5, bottom: 0, right: -(titleLabel?.frame.width ?? 0))
         titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageView?.frame.width ?? 0), bottom: 0, right: (imageView?.frame.width ?? 0) + 5)
-        
         contentHorizontalAlignment = .center
     }
 }

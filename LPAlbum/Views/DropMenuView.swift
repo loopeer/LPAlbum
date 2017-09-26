@@ -64,8 +64,19 @@ class DropMenuView: UIView {
         tableView.rowHeight = rowHeight
         
         let height = min(rowHeight * CGFloat(albums.count), 400)
-        tableView.frame = CGRect(x: 0, y: -height, width: frame.size.width, height: height)
-        backgroundView.frame = frame
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: topAnchor, constant: -height).isActive = true
+        tableView.heightAnchor.constraint(equalToConstant: height).isActive = true
+        tableView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        tableView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        let left = backgroundView.leftAnchor.constraint(equalTo: leftAnchor)
+        let right = backgroundView.rightAnchor.constraint(equalTo: rightAnchor)
+        let top = backgroundView.topAnchor.constraint(equalTo: topAnchor)
+        let bottom = backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        NSLayoutConstraint.activate([left, right, top, bottom])
     }
     
     @objc private func maskClick() { dismiss();  maskViewClick?(self) }

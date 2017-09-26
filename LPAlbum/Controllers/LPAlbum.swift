@@ -152,8 +152,17 @@ extension LPAlbum {
         collectionView.register(AlbumCollectionCell.self, forCellWithReuseIdentifier: AlbumCollectionCell.description())
         collectionView.register(TakeCameraCell.self, forCellWithReuseIdentifier: TakeCameraCell.description())
 
-        menuView = DropMenuView(frame: CGRect(x: 0, y: 64, width: .screenWidth, height: .screenHeight - 64), albums: albumModels)
+        menuView = DropMenuView(frame: CGRect(x: 0, y: 88, width: .screenWidth, height: .screenHeight - 88), albums: albumModels)
         view.addSubview(menuView)
+        menuView.translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 11, *) {
+            menuView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        }else{
+            menuView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+        }
+        menuView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        menuView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        menuView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     func cancel() { dismiss(animated: true, completion: nil) }
