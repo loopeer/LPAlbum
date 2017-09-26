@@ -308,13 +308,17 @@ extension LPAlbum: UIViewControllerPreviewingDelegate {
         
         guard let cell = previewingContext.sourceView as? AlbumCollectionCell,
               let indexPath = collectionView.indexPath(for: cell) else { return nil }
-        let previewVc = cellDidSelectForPreviewViewController(indexPath: indexPath)
+        let previewVc = PhotoPreviewController()
+        previewVc.assetModel = albumModels[currentAlbumIndex].assetModels[config.hasCamera ? indexPath.row - 1 : indexPath.row]
         previewingContext.sourceRect = previewingContext.sourceView.bounds
         return previewVc
     }
     
     public func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+        guard let cell = previewingContext.sourceView as? AlbumCollectionCell,
+              let indexPath = collectionView.indexPath(for: cell) else { return }
+        let vc = cellDidSelectForPreviewViewController(indexPath: indexPath)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

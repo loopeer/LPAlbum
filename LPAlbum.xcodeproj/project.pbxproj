@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7319E28C1F7A645F0048B3C7 /* PhotoPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7319E28B1F7A645F0048B3C7 /* PhotoPreviewController.swift */; };
 		731A48081F623AF000AC5513 /* LPAlbum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 731A47FE1F623AF000AC5513 /* LPAlbum.framework */; };
 		731A480D1F623AF000AC5513 /* LPAlbumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 731A480C1F623AF000AC5513 /* LPAlbumTests.swift */; };
 		731A480F1F623AF000AC5513 /* LPAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 731A48011F623AF000AC5513 /* LPAlbum.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -58,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7319E28B1F7A645F0048B3C7 /* PhotoPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPreviewController.swift; sourceTree = "<group>"; };
 		731A47FE1F623AF000AC5513 /* LPAlbum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LPAlbum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		731A48011F623AF000AC5513 /* LPAlbum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPAlbum.h; sourceTree = "<group>"; };
 		731A48021F623AF000AC5513 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				739181071F669FC9001EACFF /* LPAlbum.swift */,
 				739181081F669FC9001EACFF /* LPNavigationController.swift */,
 				738C26031F67934D00040E4E /* PhotosBrowerController.swift */,
+				7319E28B1F7A645F0048B3C7 /* PhotoPreviewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				739181141F669FCE001EACFF /* AuthorizationTool.swift in Sources */,
 				738C260B1F67E43200040E4E /* Extensions.swift in Sources */,
 				7391810A1F669FC9001EACFF /* LPNavigationController.swift in Sources */,
+				7319E28C1F7A645F0048B3C7 /* PhotoPreviewController.swift in Sources */,
 				739181121F669FCE001EACFF /* AlbumError.swift in Sources */,
 				739181171F669FCE001EACFF /* Models.swift in Sources */,
 				7391811F1F66B3A4001EACFF /* TitleView.swift in Sources */,
