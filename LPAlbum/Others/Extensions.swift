@@ -129,7 +129,7 @@ extension CGSize {
 var keyHitThstEdgeInsets = "HitTestEdgeInsets"
 extension UIControl {
     
-    public var lp_hitEdgeInsets: UIEdgeInsets? {
+   var lp_hitEdgeInsets: UIEdgeInsets? {
         get {
             let value = objc_getAssociatedObject(self, &keyHitThstEdgeInsets) as? NSValue
             return value.map { $0.uiEdgeInsetsValue }
