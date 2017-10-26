@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LPAlbum"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Can a decent enough photo album, photo album multi-select"
 
   s.homepage     = "https://github.com/loopeer/LPAlbum"
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   
   s.source_files  = ["LPAlbum/**/*.swift", "LPAlbum/LPAlbum.h"]
   s.public_header_files = ["LPAlbum/LPAlbum.h"]
-    
+  s.resource = 'LPAlbum/Others/LPAlbum.bundle'
 
   s.ios.deployment_target = "9.0"
   s.requires_arc = true
