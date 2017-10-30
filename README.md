@@ -53,6 +53,8 @@ public extension LPAlbum {
         public static var normalBox: UIImage = Bundle.imageFromBundle("circle_normal")!
         /// 选中的选择框图片
         public static var selectedBox: UIImage = Bundle.imageFromBundle("circle_selected")!
+        /// 选择框box的可点击区域向外的扩展size
+        public static var boxEdgeInsets = UIEdgeInsets(top: -5, left: -5, bottom: -5, right: -5)
     }
 }
 
@@ -132,7 +134,7 @@ Specify LPAlbum into your project's Podfile:
 ```ruby
 # source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 target '<Your App Target>' do
@@ -147,19 +149,6 @@ Then run the following command:
 $ pod install
 ```
 
-
-### 2. Carthage
-
-[Carthage](https://github.com/Carthage/Carthage) is a simple, decentralized
-dependency manager for Cocoa.
-
-Specify LPAlbum into your project's Carthage:
-
-
-```
-github "loopeer/LPAlbum" ~> 1.0.1
-
-```
 
 
 

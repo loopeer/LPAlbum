@@ -24,12 +24,12 @@ class PhotosBrowerController: UIViewController {
         super.viewDidLoad()
         setupUI()
         refreshNavigation()
-        addCache()
+//        addCache()
     }
     
     deinit {
         print("\(self) deinit")
-        removeCache()
+//        removeCache()
     }
 }
 

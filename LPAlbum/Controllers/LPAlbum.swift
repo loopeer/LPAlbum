@@ -45,8 +45,9 @@ public class LPAlbum: UIViewController {
             let itemSize = (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
             let scale = UIScreen.main.scale
             let targetSize = CGSize(width: itemSize.width * scale, height: itemSize.height * scale)
-            AlbumManager.imageManager.startCachingImages(for: self.allAssets, targetSize: targetSize, contentMode: .aspectFill, options: nil)
-            
+            DispatchQueue.global().async {
+                AlbumManager.imageManager.startCachingImages(for: self.allAssets, targetSize: targetSize, contentMode: .aspectFill, options: nil)
+            }
         }
     }
     
@@ -233,7 +234,7 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
                 var newModel = model
                 newModel.isSelect = !$0
                 self.albumModels = self.albumModels.change(assetModel: newModel)
-                self.collectionView.reloadItems(at: [indexPath])
+                UIView.performWithoutAnimation { self.collectionView.reloadItems(at: [indexPath]) }
             }
             if #available(iOS 9.0, *) {
                 guard traitCollection.forceTouchCapability == .available else { return cell }
