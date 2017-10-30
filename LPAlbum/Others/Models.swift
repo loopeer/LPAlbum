@@ -74,6 +74,17 @@ extension Array where Iterator.Element == AlbumModel {
     }
 }
 
+extension Array where Iterator.Element == PHAsset {
+    @discardableResult
+    mutating func remove(_ element: PHAsset) -> PHAsset? {
+        guard let index = index(of: element) else { return nil}
+        return remove(at: index)
+    }
+}
+
+
+
+
 
 
 

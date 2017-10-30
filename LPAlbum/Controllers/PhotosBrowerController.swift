@@ -71,10 +71,12 @@ extension PhotosBrowerController {
     
     func addCache() {
         let scale = UIScreen.main.scale
-        AlbumManager.imageManager.startCachingImages(for: assetModels.map{ $0.asset },
-                                                     targetSize: CGSize(width: itemSize.width * scale, height: itemSize.height * scale),
-                                                     contentMode: .aspectFill,
-                                                     options: nil)
+        DispatchQueue.global().async {
+            AlbumManager.imageManager.startCachingImages(for: self.assetModels.map{ $0.asset },
+                                                         targetSize: CGSize(width: self.itemSize.width * scale, height: self.itemSize.height * scale),
+                                                         contentMode: .aspectFill,
+                                                         options: nil)
+        }
     }
     func removeCache() {
         let scale = UIScreen.main.scale

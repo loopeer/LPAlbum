@@ -39,7 +39,7 @@ class AlbumCollectionCell: UICollectionViewCell {
         iconButton.frame = CGRect(x: frame.width - padding - iconWH, y: padding, width: iconWH, height: iconWH)
         iconButton.setBackgroundImage(LPAlbum.Style.normalBox , for: .normal)
         iconButton.setBackgroundImage(LPAlbum.Style.selectedBox, for: .selected)
-        iconButton.lp_hitEdgeInsets = UIEdgeInsets(top: -5, left: -5, bottom: -5, right: -5)
+        iconButton.lp_hitEdgeInsets = LPAlbum.Style.boxEdgeInsets
         
         addSubview(photoView)
         addSubview(iconButton)

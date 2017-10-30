@@ -35,6 +35,8 @@ public extension LPAlbum {
         public static var normalBox: UIImage = Bundle.imageFromBundle("circle_normal")!
         /// 选中的选择框图片
         public static var selectedBox: UIImage = Bundle.imageFromBundle("circle_selected")!
+        /// 选择框box的可点击区域向外的扩展size
+        public static var boxEdgeInsets = UIEdgeInsets(top: -5, left: -5, bottom: -5, right: -5)
     }
     
 }

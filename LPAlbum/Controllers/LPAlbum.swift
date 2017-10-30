@@ -38,13 +38,15 @@ public class LPAlbum: UIViewController {
     
     fileprivate var currentAlbumIndex: Int = 0
     fileprivate var albumModels = [AlbumModel]()
+    fileprivate var selectedAssets = [PHAsset]()
     fileprivate var allAssets = [PHAsset]() {
         didSet{
             //如果有Observer, 图片添加或者删除了, 要响应的添加或删除该图片的缓存
-            let itemSize = (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
+            let itemSize = (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
             let scale = UIScreen.main.scale
             let targetSize = CGSize(width: itemSize.width * scale, height: itemSize.height * scale)
-            AlbumManager.imageManager.startCachingImages(for: allAssets, targetSize: targetSize, contentMode: .aspectFill, options: nil)
+            AlbumManager.imageManager.startCachingImages(for: self.allAssets, targetSize: targetSize, contentMode: .aspectFill, options: nil)
+            
         }
     }
     
@@ -167,9 +169,8 @@ extension LPAlbum {
     
     func cancel() { dismiss(animated: true, completion: nil) }
     func confirm() {
-        let assets = albumModels.allSelectedAsset
         var result = [UIImage]()
-        for asset in assets {
+        for asset in selectedAssets {
             let size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight) //PHImageManagerMaximumSize
             let targetSize = targetSizeBlock?(size) ?? size
             let option = PHImageRequestOptions()
@@ -183,7 +184,7 @@ extension LPAlbum {
                                       contentMode: .aspectFit,
                                       resultHandler: {[weak self] (image, _) in
                     if image != nil { result.append(image!) }
-                    if result.count == assets.count {
+                    if result.count == self?.selectedAssets.count {
                         DispatchQueue.main.async { self?.completeSelectImagesBlock?(result) }
                     }
                 })
@@ -201,7 +202,8 @@ extension LPAlbum {
             guard let `self` = self else { return }
             
             let willselect = !button.isSelected
-            guard self.checkoutMaxCount(willselect: willselect, show: vc) else { return }
+            let asset = vc.assetModels[index].asset
+            guard self.checkoutCount(willselect: willselect, asset: asset, show: vc) else { return }
             
             button.isSelected = willselect
             vc.assetModels[index].isSelect = willselect
@@ -227,7 +229,7 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.set(model)
             cell.iconClickAction = {[weak self] in
                 guard let `self` = self else { return }
-                guard self.checkoutMaxCount(willselect: !$0, show: self) else { return }
+                guard self.checkoutCount(willselect: !$0, asset: model.asset, show: self) else { return }
                 var newModel = model
                 newModel.isSelect = !$0
                 self.albumModels = self.albumModels.change(assetModel: newModel)
@@ -248,7 +250,7 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if config.hasCamera && indexPath.row == 0 {
-            guard checkoutMaxCount(willselect: true, show: self) else { return }
+            guard checkoutCount(willselect: true, show: self) else { return }
             AuthorizationTool.cameraRequestAuthorization{
                 $0 == .authorized ? self.takePhoto() : self.errorBlock?(self, AlbumError.noCameraPermission)
             }
@@ -268,11 +270,13 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
         present(picker, animated: true, completion: nil)
     }
     
-    func checkoutMaxCount(willselect: Bool, show vc: UIViewController) -> Bool {
-        if self.config.maxSelectCount == self.albumModels[0].selectCount && willselect {
+    func checkoutCount(willselect: Bool, asset: PHAsset? = nil, show vc: UIViewController) -> Bool {
+        if self.config.maxSelectCount == self.selectedAssets.count && willselect {
             self.errorBlock?(vc,AlbumError.moreThanLargestChoiceCount)
             return false
         }
+        guard let asset = asset else { return true }
+        if willselect { self.selectedAssets.append(asset) } else { _ = self.selectedAssets.remove(asset) }
         return true
     }
 }
