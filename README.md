@@ -18,6 +18,16 @@
 
 **LPAlbum** is a album including the function of multiple images, photo browsing, camera taking pictures. It is very easy to use
 
+<table>
+ <tr>
+  <td>
+    <img src="Images/demo1.png" width="300"/>
+  </td>
+  <td>
+    <img src="Images/demo2.png" width="300"/>
+  </td>
+ </tr>
+</table>
 
 ## How to use
 
