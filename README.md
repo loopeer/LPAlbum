@@ -97,6 +97,10 @@ public enum AlbumError: Error {
 
 3. Use: 
 
+> Tips: add row in your project info.plist
+> 1. `Privacy - Photo Library Usage Description` : `Can I get photo album permissions?`
+> 2. `Privacy - Camera Usage Description` : `Can I get camera permissions?`
+> 3. `Localization native development region` : `en` or `china`
 
 ```Swift
 
