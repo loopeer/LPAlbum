@@ -35,6 +35,7 @@ public class LPAlbum: UIViewController {
     fileprivate var collectionView: UICollectionView!
     fileprivate var titleView: TitleView!
     fileprivate var menuView: DropMenuView!
+    fileprivate var confirmItem: UIBarButtonItem!
     
     fileprivate var currentAlbumIndex: Int = 0
     fileprivate var albumModels = [AlbumModel]()
@@ -135,6 +136,8 @@ extension LPAlbum {
     func setupUI() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: String.local("取消"), style: .plain, target: self, action: #selector(cancel))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: String.local("完成"), style: .plain, target: self, action: #selector(confirm))
+        navigationItem.rightBarButtonItem!.isEnabled = false
+        confirmItem = navigationItem.rightBarButtonItem!
         
         titleView = TitleView(frame: .zero)
         navigationItem.titleView = titleView
@@ -272,12 +275,14 @@ extension LPAlbum: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func checkoutCount(willselect: Bool, asset: PHAsset? = nil, show vc: UIViewController) -> Bool {
+        
         if self.config.maxSelectCount == self.selectedAssets.count && willselect {
             self.errorBlock?(vc,AlbumError.moreThanLargestChoiceCount)
             return false
         }
         guard let asset = asset else { return true }
         if willselect { self.selectedAssets.append(asset) } else { _ = self.selectedAssets.remove(asset) }
+        confirmItem.isEnabled = self.selectedAssets.count > 0
         return true
     }
 }
