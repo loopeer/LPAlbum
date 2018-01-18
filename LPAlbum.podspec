@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LPAlbum"
-  s.version      = "0.0.7"
+  s.version      = "0.0.8"
   s.summary      = "Can a decent enough photo album, photo album multi-select"
 
   s.homepage     = "https://github.com/loopeer/LPAlbum"
