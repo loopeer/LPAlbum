@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "LPAlbum"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "Can a decent enough photo album, photo album multi-select"
 
   s.homepage     = "https://github.com/loopeer/LPAlbum"
@@ -17,5 +17,6 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "9.0"
   s.requires_arc = true
-
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
+  
 end
