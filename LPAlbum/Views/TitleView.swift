@@ -39,7 +39,7 @@ class TitleView: UIButton {
         addTarget(self, action: #selector(click), for: .touchUpInside)
     }
     
-    func click() { clickAction?(self) }
+    @objc func click() { clickAction?(self) }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -168,8 +168,8 @@ extension LPAlbum {
         menuView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    func cancel() { dismiss(animated: true, completion: nil) }
-    func confirm() {
+    @objc func cancel() { dismiss(animated: true, completion: nil) }
+    @objc func confirm() {
         var result = [UIImage]()
         for asset in selectedAssets {
             let size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight) //PHImageManagerMaximumSize

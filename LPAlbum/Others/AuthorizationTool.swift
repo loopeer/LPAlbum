@@ -12,13 +12,13 @@ import Photos
 class AuthorizationTool {
     /// 相机权限
     static func cameraRequestAuthorization(queue: DispatchQueue = .main, complete: @escaping (_ status: AVAuthorizationStatus) -> Void) {
-        switch AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) {
+        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
         case .authorized:   complete(.authorized)
         case .denied:       complete(.denied)
         case .restricted:   complete(.restricted)
         case .notDetermined:
             queue.suspend()
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted) in
                 DispatchQueue.main.async { complete( granted ? .authorized : .denied ) }
                 queue.resume()
             })

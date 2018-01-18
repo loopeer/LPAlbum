@@ -56,6 +56,6 @@ class AlbumCollectionCell: UICollectionViewCell {
         photoView.image = nil
     }
     
-    func iconTap() { iconClickAction?(iconButton.isSelected) }
+    @objc func iconTap() { iconClickAction?(iconButton.isSelected) }
 }
 

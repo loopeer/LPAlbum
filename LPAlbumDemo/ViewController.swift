@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.description())
     }
 
-    func openAlbum() {
+    @objc func openAlbum() {
         LPAlbum.show(at: self)  {
             $0.columnCount = 4
             $0.hasCamera = true
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
             _ = images.map{ print($0.size) }
         }
     }
-    func clean() {
+    @objc func clean() {
         photos.removeAll()
         collectionView.reloadData()
     }

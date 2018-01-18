@@ -24,7 +24,7 @@ class LPNavigationController: UINavigationController {
         super.init(rootViewController: rootViewController)
         navigationBar.barTintColor = LPAlbum.Style.barTintColor
         navigationBar.tintColor = LPAlbum.Style.tintColor
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: LPAlbum.Style.barTitleColor]
+        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: LPAlbum.Style.barTitleColor]
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

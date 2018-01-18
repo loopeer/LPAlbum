@@ -86,7 +86,7 @@ extension PhotosBrowerController {
                                                     options: nil)
     }
     
-    func chooseClick() {
+    @objc func chooseClick() {
         chooseAction?(currentIndex, chooseButton, self)
     }
 }

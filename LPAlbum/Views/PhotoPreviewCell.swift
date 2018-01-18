@@ -53,9 +53,9 @@ class PhotoPreviewCell: UICollectionViewCell {
         
     }
 
-    func singleTapClick() { singleTapAction?() }
+    @objc func singleTapClick() { singleTapAction?() }
     
-    func doubleTapClick(ges: UITapGestureRecognizer) {
+    @objc func doubleTapClick(ges: UITapGestureRecognizer) {
         if scrollView.zoomScale > 1.0 {
             scrollView.contentInset = .zero
             scrollView.setZoomScale(1.0, animated: true)
