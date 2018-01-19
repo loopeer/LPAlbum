@@ -152,7 +152,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target '<Your App Target>' do
-  pod 'LPAlbum'
+  pod 'LPAlbum', '~> 0.0.9'
 end
 ```
 
